@@ -6,9 +6,9 @@
     "./node_modules/.bin/eslint --ext .js,.vue,.jsx,.ts,.tsx"
   ],
   "{app,config,database,lang,routes,tests}/*.php": [
-    "./vendor/bin/phpcs --standard=./phpcs.xml"
+    "./vendor/bin/phpcs -p --extensions=php --standard=./phpcs.xml"
   ],
   "{app,config,database,lang,routes,tests}/**/*.php": [
-    "./vendor/bin/phpcs --standard=./phpcs.xml"
+    "./vendor/bin/phpcs -p --extensions=php --standard=./phpcs.xml"
   ]
 }

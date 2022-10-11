@@ -36,7 +36,7 @@
     },
     "scripts": {
         "phpcs": [
-            "@php ./vendor/bin/phpcs --standard=./phpcs.xml"
+            "@php ./vendor/bin/phpcs -p --extensions=php --standard=./phpcs.xml ./"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
