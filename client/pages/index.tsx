@@ -1,9 +1,9 @@
-import { NuxtWelcome } from "#components"
+import { ElSkeleton } from 'element-plus'
 
 export default defineComponent({
   setup () {
     return () => (
-      <NuxtWelcome />
+      <ElSkeleton rows={5} animated />
     )
-  }
+  },
 })

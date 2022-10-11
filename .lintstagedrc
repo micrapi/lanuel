@@ -1,8 +1,14 @@
 {
   "./client/*.{js,jsx,ts,tsx,vue}": [
-    "./node_modules/.bin/eslint"
+    "./node_modules/.bin/eslint --ext .js,.vue,.jsx,.ts,.tsx"
+  ],
+  "./client/**/*.{js,jsx,ts,tsx,vue}": [
+    "./node_modules/.bin/eslint --ext .js,.vue,.jsx,.ts,.tsx"
   ],
   "{app,config,database,lang,routes,tests}/*.php": [
+    "./vendor/bin/phpcs --standard=./phpcs.xml"
+  ],
+  "{app,config,database,lang,routes,tests}/**/*.php": [
     "./vendor/bin/phpcs --standard=./phpcs.xml"
   ]
 }

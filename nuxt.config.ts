@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
   runtimeConfig: {
+    authCookieName: '',
     public: {
       appName: '',
       appUrl: '',
