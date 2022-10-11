@@ -9,8 +9,12 @@
     "postinstall": "nuxt prepare && husky install"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.4.3",
     "dotenv-expand": "^9.0.0",
+    "element-plus": "^2.2.17",
+    "normalize.css": "^8.0.1",
     "nuxt": "3.0.0-rc.11",
+    "pinia": "^2.0.23",
     "sass": "^1.55.0"
   },
   "devDependencies": {
