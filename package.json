@@ -1,14 +1,23 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build"
-    },
-    "devDependencies": {
-        "axios": "^0.27",
-        "laravel-vite-plugin": "^0.6.0",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
-        "vite": "^3.0.0"
-    }
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev -p 3003 -H 0.0.0.0",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue,.jsx,.ts,.tsx ./client",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare && husky install"
+  },
+  "dependencies": {
+    "dotenv-expand": "^9.0.0",
+    "nuxt": "3.0.0-rc.11",
+    "sass": "^1.55.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config-typescript": "^11.0.0",
+    "eslint": "^8.25.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "typescript": "^4.8.4"
+  }
 }

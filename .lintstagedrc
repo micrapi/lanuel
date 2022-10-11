@@ -1,0 +1,8 @@
+{
+  "./client/*.{js,jsx,ts,tsx,vue}": [
+    "./node_modules/.bin/eslint"
+  ],
+  "{app,config,database,lang,routes,tests}/*.php": [
+    "./vendor/bin/phpcs --standard=./phpcs.xml"
+  ]
+}

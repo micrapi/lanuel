@@ -14,3 +14,12 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+
+# From NuxtJs
+*.log*
+.nuxt
+.nitro
+.cache
+.output
+.env
+dist
