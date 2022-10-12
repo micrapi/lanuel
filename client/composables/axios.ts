@@ -26,11 +26,10 @@ export const useHttpClient = <T = any, D = any>() => {
   if (process.server) {
     const runtimeConfig = useRuntimeConfig()
     const cookieName = runtimeConfig.authCookieName
-    const event = useRequestEvent()
-    const token = getCookie(event, cookieName)
+    const token = getCookie(useRequestEvent(), cookieName)
 
     if (token) {
-      instance.defaults.headers.Cookie = `${cookieName}=${token}`
+      instance.defaults.headers.Authorization = `Bearer ${token}`
     }
   }
 

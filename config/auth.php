@@ -2,6 +2,8 @@
 
 return [
 
+    'cookie_name' => env('AUTH_COOKIE_NAME', '_at'),
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
