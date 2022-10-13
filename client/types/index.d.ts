@@ -25,4 +25,5 @@ interface User {
 
 interface AuthState {
   user: Maybe<User>
+  fetched: boolean
 }
