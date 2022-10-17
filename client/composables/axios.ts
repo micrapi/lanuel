@@ -1,6 +1,6 @@
 import { getCookie } from 'h3'
 import axios from 'axios'
-import type { AxiosRequestConfig, AxiosResponse } from 'axios'
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElNotification } from 'element-plus'
 import { AxiosRequest } from '@/types'
 
@@ -33,15 +33,15 @@ export const useHttpClient = <T = any, D = any>() => {
     }
   }
 
-  instance.interceptors.request.use((config) => {
+  instance.interceptors.request.use((config: AxiosRequestConfig<D>) => {
     return config
-  }, (error) => {
+  }, (error: AxiosError<T, D>) => {
     return Promise.reject(error)
   })
 
-  instance.interceptors.response.use((response) => {
-    return response.data
-  }, (error) => {
+  instance.interceptors.response.use((response: AxiosResponse<T, D>) => {
+    return response
+  }, (error: AxiosError<T, D>) => {
     if (error.name === 'AxiosError' && error.code === 'ERR_NETWORK') {
       ElNotification.error({
         title: 'Error',
@@ -57,7 +57,6 @@ export const useHttpClient = <T = any, D = any>() => {
           status: error.response.status,
           data: {
             data: null,
-            message: error.response.data?.message,
           },
         }
     }

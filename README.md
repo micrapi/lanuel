@@ -1,13 +1,13 @@
-# Larnuxele
+# Lanuel
 A Laravel - Nuxt 3 - Element Plus starter kit.
 
 ## Installation
 
 ### Clone this repository
 ```
-git clone https://github.com/micrapi/larnuxele.git
+git clone https://github.com/micrapi/lanuel.git
 
-cd larnuxele
+cd lanuel
 ```
 
 ### Laravel

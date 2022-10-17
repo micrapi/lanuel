@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/stores/auth'
 
-export default defineNuxtRouteMiddleware(async () => {
+export default defineNuxtRouteMiddleware(async (to) => {
   const authStore = useAuthStore()
 
   if (!authStore.fetched) {
@@ -8,6 +8,11 @@ export default defineNuxtRouteMiddleware(async () => {
   }
 
   if (!authStore.user) {
-    return navigateTo('/login')
+    return navigateTo({
+      name: 'login',
+      query: {
+        back: to.name.toString(),
+      },
+    })
   }
 })
