@@ -23,14 +23,25 @@ export const useAuthStore = defineStore('auth', {
         this.user = response.data.user
 
         return true
-      } catch (e) {}
+      } catch (e) { }
+
+      return false
+    },
+    async logout () {
+      try {
+        await useHttpClient().post(route('api.v1.logout'))
+
+        this.user = null
+
+        return true
+      } catch (e) { }
 
       return false
     },
     async fetch () {
       try {
         const response = await useHttpClient().get(route('api.v1.me'))
-        this.user = response
+        this.user = response.data
       } catch (e) {
         this.user = null
       }

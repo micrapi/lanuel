@@ -17,6 +17,14 @@ export default defineNuxtConfig({
       ],
     },
   },
+  appConfig: {
+    auth: {
+      redirect: {
+        login: 'index',
+        logout: 'index',
+      },
+    },
+  },
   build: {
     transpile: [
       ...(['build', 'generate'].includes(lifecycle) ? ['element-plus'] : []),

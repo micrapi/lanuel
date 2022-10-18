@@ -1,5 +1,66 @@
 @use 'normalize.css';
 
+a {
+  text-decoration: none;
+  color: var(--el-color-primary)
+}
+
 body {
   font-family: 'Roboto', sans-serif;
+}
+
+//
+// Container
+//
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 960px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+
+  @media (min-width: 1920px) {
+    max-width: 1560px;
+  }
+}
+
+.layout-default {
+  .el-header {
+    display: flex;
+    box-shadow: var(--el-box-shadow-light);
+    align-items: center;
+
+    .container {
+      align-items: center;
+    }
+
+    .logo {
+      margin: 0;
+    }
+
+    .menu {
+      margin-left: auto;
+    }
+  }
+
+  .el-main {
+    >.container {
+      >.el-row {
+        >.el-col {
+          background-color: var(--el-bg-color-page);
+          padding: 0.5rem;
+        }
+      }
+    }
+  }
 }

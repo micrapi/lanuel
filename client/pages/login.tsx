@@ -1,4 +1,6 @@
-import { ElButton, ElForm, ElFormItem, ElInput, ElSwitch } from 'element-plus'
+import type { RouteLocationRaw } from 'vue-router'
+import { ElButton, ElCol, ElForm, ElFormItem, ElInput, ElRow, ElSwitch } from 'element-plus'
+import { isString } from '@vueuse/shared'
 import { useAuthStore } from '@/stores/auth'
 
 export default defineComponent({
@@ -8,6 +10,17 @@ export default defineComponent({
     })
 
     const authStore = useAuthStore()
+    const appConfig = useAppConfig()
+    const route = useRoute()
+    const router = useRouter()
+    const back = route.query.back
+    let backTo: RouteLocationRaw
+
+    if (back && isString(back) && router.hasRoute(back)) {
+      backTo = { name: back }
+    } else {
+      backTo = { name: appConfig.auth.redirect.login }
+    }
 
     const form = reactive({
       email: '',
@@ -16,24 +29,34 @@ export default defineComponent({
     })
 
     const login = async () => {
-      await authStore.login(form)
+      const result = await authStore.login(form)
+
+      if (result === true) {
+        return navigateTo(backTo)
+      }
     }
 
     return () => (
-      <ElForm model={form}>
-        <ElFormItem label="Email">
-          <ElInput v-model={form.email}></ElInput>
-        </ElFormItem>
-        <ElFormItem label="Password">
-          <ElInput v-model={form.password} type="password"></ElInput>
-        </ElFormItem>
-        <ElFormItem label="Password">
-          <ElSwitch v-model={form.remember} />
-        </ElFormItem>
-        <ElFormItem>
-          <ElButton type="primary" onClick={login}>Login</ElButton>
-        </ElFormItem>
-      </ElForm>
+      <div class="container">
+        <ElRow>
+          <ElCol span={12} offset={6}>
+            <ElForm model={form} labelWidth="90px">
+              <ElFormItem label="Email">
+                <ElInput v-model={form.email}></ElInput>
+              </ElFormItem>
+              <ElFormItem label="Password">
+                <ElInput v-model={form.password} type="password"></ElInput>
+              </ElFormItem>
+              <ElFormItem label="Remember">
+                <ElSwitch v-model={form.remember} />
+              </ElFormItem>
+              <ElFormItem>
+                <ElButton type="primary" onClick={login}>Login</ElButton>
+              </ElFormItem>
+            </ElForm>
+          </ElCol>
+        </ElRow>
+      </div>
     )
   },
 })
