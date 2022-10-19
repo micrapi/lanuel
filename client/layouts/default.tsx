@@ -17,29 +17,29 @@ export default defineComponent({
       }
     }
 
-    const menu = authStore.id
-      ? (<ElDropdown trigger={'click'}>{
-        {
-          default: () => <ElButton link>{authStore.user.name}</ElButton>,
-          dropdown: () => (
-            <ElDropdownMenu>
-              <ElDropdownItem><NuxtLink to={'/account'}>Account</NuxtLink></ElDropdownItem>
-              <ElDropdownItem onClick={logout}>Logout</ElDropdownItem>
-            </ElDropdownMenu>
-          ),
-        }
-      }</ElDropdown>)
-      : (<div class="links">
-        <NuxtLink class="el-button is-link" to={'/login'}>Login</NuxtLink>
-      </div>)
-
     return () => (
       <div class="layout-wrapper">
         <ElContainer>
           <ElHeader height="60px">
             <ElContainer class={'container'}>
               <NuxtLink to={'/'}><h1 class="logo">Lanuel</h1></NuxtLink>
-              <div class="menu">{menu}</div>
+              <div class="menu">{
+                authStore.id
+                  ? (<ElDropdown trigger={'click'}>{
+                    {
+                      default: () => <ElButton link>{authStore.user.name}</ElButton>,
+                      dropdown: () => (
+                        <ElDropdownMenu>
+                          <ElDropdownItem><NuxtLink to={'/account'}>Account</NuxtLink></ElDropdownItem>
+                          <ElDropdownItem onClick={logout}>Logout</ElDropdownItem>
+                        </ElDropdownMenu>
+                      ),
+                    }
+                  }</ElDropdown>)
+                  : (<div class="links">
+                    <NuxtLink class="el-button is-link" to={'/login'}>Login</NuxtLink>
+                  </div>)
+              }</div>
             </ElContainer>
           </ElHeader>
           <ElMain>
