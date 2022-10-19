@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'Larnuxele',
+      name: 'Lanuel',
       exec_mode: 'cluster',
       instances: '4',
       watch: false,
