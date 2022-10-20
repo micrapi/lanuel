@@ -42,6 +42,7 @@ return [
     */
 
     'debug' => (bool) env('APP_DEBUG', false),
+    'log_db_query' => (bool) env('LOG_DB_QUERY', false),
 
     /*
     |--------------------------------------------------------------------------

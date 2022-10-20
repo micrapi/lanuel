@@ -8,8 +8,8 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1, user-scalable=no',
       link: [
-        { hid: 'preconnect-fonts-google', rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { hid: 'preconnect-fonts-gstatic', rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
+        { id: 'preconnect-fonts-google', rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { id: 'preconnect-fonts-gstatic', rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap'

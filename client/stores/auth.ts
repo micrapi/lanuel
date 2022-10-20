@@ -31,8 +31,6 @@ export const useAuthStore = defineStore('auth', {
       try {
         await useHttpClient().post(route('api.v1.logout'))
 
-        this.user = null
-
         return true
       } catch (e) { }
 
