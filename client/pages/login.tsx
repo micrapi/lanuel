@@ -32,7 +32,9 @@ export default defineComponent({
       const result = await authStore.login(form)
 
       if (result === true) {
-        return navigateTo(backTo)
+        const redirect = router.resolve(backTo)
+
+        window.location.href = redirect.href
       }
     }
 
