@@ -1,14 +1,15 @@
-import type { AxiosRequestHeaders } from 'axios'
+import type { SearchParams } from 'ohmyfetch'
 
 export type Maybe<T> = T | null
 
-export interface AxiosRequest {
-  method: string
-  params?: any
-  data?: any
-  headers?: AxiosRequestHeaders
-}
+export type FetchBody = RequestInit['body'] | Record<string, any>
 
+export interface FetchRequest {
+  method: 'get' | 'post' | 'put' | 'patch' | 'delete'
+  params?: SearchParams
+  body?: FetchBody
+  headers?: HeadersInit
+}
 // ----------------
 // Model
 // ----------------

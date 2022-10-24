@@ -8,6 +8,7 @@ module.exports = {
   ],
   rules: {
     'comma-dangle': ['error', 'always-multiline'],
+    'dot-notation': ['off'],
     'multiline-ternary': ['error', 'always-multiline'],
     'quotes': ['error', 'single'],
   },

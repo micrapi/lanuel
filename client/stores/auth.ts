@@ -15,12 +15,12 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login ({ email, password, remember }) {
       try {
-        const response = await useHttpClient<LoginResponse>().post(route('api.v1.login'), {
+        const response = await useHttpFetch().post<LoginResponse>(route('api.v1.login'), {
           email,
           password,
           remember,
         })
-        this.user = response.data.user
+        this.user = response.user
 
         return true
       } catch (e) { }
@@ -29,7 +29,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async logout () {
       try {
-        await useHttpClient().post(route('api.v1.logout'))
+        await useHttpFetch().post(route('api.v1.logout'))
 
         return true
       } catch (e) { }
@@ -38,8 +38,8 @@ export const useAuthStore = defineStore('auth', {
     },
     async fetch () {
       try {
-        const response = await useHttpClient().get(route('api.v1.me'))
-        this.user = response.data
+        const response = await useHttpFetch().get(route('api.v1.me'))
+        this.user = response
       } catch (e) {
         this.user = null
       }
