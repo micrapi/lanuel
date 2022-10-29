@@ -1,5 +1,6 @@
 import { getCookie } from 'h3'
 import type { FetchOptions, SearchParams } from 'ohmyfetch'
+import merge from 'lodash/merge'
 import { FetchRequest } from '@/types'
 import type { FetchBody } from '@/types'
 
@@ -26,40 +27,29 @@ export const useHttpFetch = () => {
 
   const httpClient = {
     get: <T = unknown>(url: string, params?: SearchParams, headers?: HeadersInit): Promise<T> => {
-      return instance(url, {
-        ...config,
+      return instance(url, merge({
         method: 'get',
-        params,
-        headers,
-      })
+      }, config, headers, params))
     },
     post: <T = unknown>(url: string, body?: FetchBody, headers?: HeadersInit): Promise<T> => {
-      return instance(url, {
+      return instance(url, merge({
         method: 'post',
-        body,
-        headers,
-      })
+      }, config, headers, body))
     },
     put: <T = unknown>(url: string, body?: FetchBody, headers?: HeadersInit): Promise<T> => {
-      return instance(url, {
+      return instance(url, merge({
         method: 'put',
-        body,
-        headers,
-      })
+      }, config, headers, body))
     },
     patch: <T = unknown>(url: string, body?: FetchBody, headers?: HeadersInit): Promise<T> => {
-      return instance(url, {
+      return instance(url, merge({
         method: 'patch',
-        body,
-        headers,
-      })
+      }, config, headers, body))
     },
     delete: <T = unknown>(url: string, params?: SearchParams, headers?: HeadersInit): Promise<T> => {
-      return instance(url, {
+      return instance(url, merge({
         method: 'delete',
-        params,
-        headers,
-      })
+      }, config, headers, params))
     },
     multiple: (requests: FetchRequest[]) => {
       return requests.length ? Promise.all(requests) : []
