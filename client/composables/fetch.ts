@@ -26,30 +26,40 @@ export const useHttpFetch = () => {
   const instance = $fetch.create(config)
 
   const httpClient = {
-    get: <T = unknown>(url: string, params?: SearchParams, headers?: HeadersInit): Promise<T> => {
-      return instance(url, merge({
+    get: <T = unknown> (url: string, params?: SearchParams, headers?: HeadersInit): Promise<T> => {
+      return instance(url, merge(config, {
         method: 'get',
-      }, config, headers, params))
+        headers,
+        params,
+      }))
     },
-    post: <T = unknown>(url: string, body?: FetchBody, headers?: HeadersInit): Promise<T> => {
-      return instance(url, merge({
+    post: <T = unknown> (url: string, body?: FetchBody, headers?: HeadersInit): Promise<T> => {
+      return instance(url, merge(config, {
         method: 'post',
-      }, config, headers, body))
+        headers,
+        body,
+      }))
     },
-    put: <T = unknown>(url: string, body?: FetchBody, headers?: HeadersInit): Promise<T> => {
-      return instance(url, merge({
+    put: <T = unknown> (url: string, body?: FetchBody, headers?: HeadersInit): Promise<T> => {
+      return instance(url, merge(config, {
         method: 'put',
-      }, config, headers, body))
+        headers,
+        body,
+      }))
     },
-    patch: <T = unknown>(url: string, body?: FetchBody, headers?: HeadersInit): Promise<T> => {
-      return instance(url, merge({
+    patch: <T = unknown> (url: string, body?: FetchBody, headers?: HeadersInit): Promise<T> => {
+      return instance(url, merge(config, {
         method: 'patch',
-      }, config, headers, body))
+        headers,
+        body,
+      }))
     },
-    delete: <T = unknown>(url: string, params?: SearchParams, headers?: HeadersInit): Promise<T> => {
-      return instance(url, merge({
+    delete: <T = unknown> (url: string, params?: SearchParams, headers?: HeadersInit): Promise<T> => {
+      return instance(url, merge(config, {
         method: 'delete',
-      }, config, headers, params))
+        headers,
+        params,
+      }))
     },
     multiple: (requests: FetchRequest[]) => {
       return requests.length ? Promise.all(requests) : []
