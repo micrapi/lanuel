@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import type { FetchOptions } from 'ohmyfetch'
 import type { AuthState, User } from '@/types'
 import { route } from '@/utils/helpers'
 
@@ -6,6 +7,8 @@ interface LoginResponse {
   user: User
   token: string
 }
+
+type FetchResponse = User
 
 export const useAuthStore = defineStore('auth', {
   state: (): AuthState => ({
@@ -36,11 +39,19 @@ export const useAuthStore = defineStore('auth', {
 
       return false
     },
-    async fetch () {
+    async fetch (options: FetchOptions) {
       try {
-        const response = await useHttpFetch().get(route('api.v1.me'))
+        options = options || {}
+        options.method = 'get'
+        options.credentials = 'include'
+        options.headers = options.headers || {}
+        options.headers['Accept'] = 'application/json'
+        options.retry = 1
+
+        const response = await $fetch<FetchResponse>(route('api.v1.me'), options)
         this.user = response
       } catch (e) {
+        console.log(e)
         this.user = null
       }
 
