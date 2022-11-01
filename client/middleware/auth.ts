@@ -1,3 +1,4 @@
+import { getCookie } from 'h3'
 import { useAuthStore } from '@/stores/auth'
 
 export default defineNuxtRouteMiddleware(async (to) => {
@@ -9,9 +10,14 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
     if (process.server) {
       const token = getCookie(useRequestEvent(), runtimeConfig.authCookieName)
+      const xdebugSession = getCookie(useRequestEvent(), runtimeConfig.xdebugCookieName)
 
       if (token) {
         headers.Authorization = `Bearer ${token}`
+      }
+
+      if (xdebugSession) {
+        headers.Cookie = `${runtimeConfig.xdebugCookieName}=${xdebugSession}`
       }
     }
 

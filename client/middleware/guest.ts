@@ -10,9 +10,14 @@ export default defineNuxtRouteMiddleware(async () => {
 
     if (process.server) {
       const token = getCookie(useRequestEvent(), runtimeConfig.authCookieName)
+      const xdebugSession = getCookie(useRequestEvent(), runtimeConfig.xdebugCookieName)
 
       if (token) {
         headers.Authorization = `Bearer ${token}`
+      }
+
+      if (xdebugSession) {
+        headers.Cookie = `${runtimeConfig.xdebugCookieName}=${xdebugSession}`
       }
     }
 

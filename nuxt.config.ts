@@ -40,6 +40,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     authCookieName: '',
+    xdebugCookieName: '',
     public: {
       appName: '',
       appUrl: '',
