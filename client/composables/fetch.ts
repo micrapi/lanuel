@@ -17,9 +17,14 @@ export const useHttpFetch = () => {
 
   if (process.server) {
     const token = getCookie(useRequestEvent(), runtimeConfig.authCookieName)
+    const xdebugSession = getCookie(useRequestEvent(), runtimeConfig.xdebugCookieName)
 
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`
+    }
+
+    if (xdebugSession) {
+      config.headers['Cookie'] = `${runtimeConfig.xdebugCookieName}=${xdebugSession}`
     }
   }
 
