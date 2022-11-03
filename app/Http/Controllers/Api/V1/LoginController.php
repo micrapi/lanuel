@@ -56,7 +56,10 @@ class LoginController extends Controller
             return response()->json([
                 'user' => $user,
                 'token' => app('encrypter')->encrypt(
-                    CookieValuePrefix::create('_aat', app('encrypter')->getKey()) . $token->plainTextToken,
+                    CookieValuePrefix::create(
+                        config('auth.cookie_name'),
+                        app('encrypter')->getKey()
+                    ) . $token->plainTextToken,
                     false
                 ),
             ], 200)->cookie(
