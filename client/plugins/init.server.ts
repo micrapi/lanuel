@@ -4,16 +4,19 @@ import { useAuthStore } from '@/stores/auth'
 export default defineNuxtPlugin(async (nuxtApp) => {
   const authStore = useAuthStore()
   const runtimeConfig = useRuntimeConfig()
-  const token = getCookie(nuxtApp.ssrContext?.event, runtimeConfig.authCookieName)
-  const xdebugSession = getCookie(nuxtApp.ssrContext?.event, runtimeConfig.xdebugCookieName)
   const headers: HeadersInit = {}
 
-  if (token) {
-    headers.Authorization = `Bearer ${token}`
-  }
+  if (nuxtApp.ssrContext) {
+    const token = getCookie(nuxtApp.ssrContext.event, runtimeConfig.authCookieName)
+    const xdebugSession = getCookie(nuxtApp.ssrContext.event, runtimeConfig.xdebugCookieName)
 
-  if (xdebugSession) {
-    headers.Cookie = `${runtimeConfig.xdebugCookieName}=${xdebugSession}`
+    if (token) {
+      headers.Authorization = `Bearer ${token}`
+    }
+
+    if (xdebugSession) {
+      headers.Cookie = `${runtimeConfig.xdebugCookieName}=${xdebugSession}`
+    }
   }
 
   await authStore.fetch({
