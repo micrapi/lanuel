@@ -3,6 +3,12 @@ import type { FetchOptions } from 'ohmyfetch'
 import type { AuthState, User } from '@/types'
 import { route } from '@/utils/helpers'
 
+interface LoginRequest {
+  email: string
+  password: string
+  remember: boolean
+}
+
 interface LoginResponse {
   user: User
   token: string
@@ -16,7 +22,7 @@ export const useAuthStore = defineStore('auth', {
     fetched: false,
   }),
   actions: {
-    async login ({ email, password, remember }) {
+    async login ({ email, password, remember }: LoginRequest) {
       try {
         const response = await useHttpFetch().post<LoginResponse>(route('api.v1.login'), {
           email,
@@ -44,14 +50,13 @@ export const useAuthStore = defineStore('auth', {
         options = options || {}
         options.method = 'get'
         options.credentials = 'include'
-        options.headers = options.headers || {}
+        options.headers = (options.headers || {}) as { [key: string]: string }
         options.headers['Accept'] = 'application/json'
         options.retry = 1
 
         const response = await $fetch<FetchResponse>(route('api.v1.me'), options)
         this.user = response
       } catch (e) {
-        console.log(e)
         this.user = null
       }
 
