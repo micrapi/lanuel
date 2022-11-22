@@ -15,7 +15,13 @@ useHead({
   bodyAttrs: {
     id: 'lanuel',
     class: computed(() => {
-      return route.name.toString() + ' layout-' + (route.meta.layout || 'default')
+      const classes = ['layout-' + (route.meta.layout || 'default')]
+
+      if (route.name) {
+        classes.push(route.name.toString())
+      }
+
+      return classes.join(' ')
     }),
   },
 })
