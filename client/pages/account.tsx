@@ -9,7 +9,7 @@ export default defineComponent({
     const authStore = useAuthStore()
 
     return () => (
-      <div class={'container'}>{`Account ${authStore.user.email}`}</div>
+      <div class={'container'}>{`Account ${authStore.user?.email}`}</div>
     )
   },
 })

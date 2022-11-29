@@ -10,7 +10,7 @@ export const route = (name: string, params: RouteParamsWithQueryOverload | Route
 export const isRoute = (route: RouteLocationNormalizedLoaded, name: string, exact: boolean = false): boolean => {
   const routeName = route.name?.toString()
 
-  return routeName && (routeName === name || (!exact && routeName.startsWith(`${name}-`)))
+  return routeName ? (routeName === name || (!exact && routeName.startsWith(`${name}-`))) : false
 }
 
 export const isAdminRoute = (route: RouteLocationNormalizedLoaded): boolean => {

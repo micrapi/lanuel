@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { acceptHMRUpdate, defineStore } from 'pinia'
 import type { FetchOptions } from 'ohmyfetch'
 import type { AuthState, User } from '@/types'
 import { route } from '@/utils/helpers'
@@ -67,3 +67,7 @@ export const useAuthStore = defineStore('auth', {
     id: state => state.user?.id,
   },
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useAuthStore, import.meta.hot))
+}

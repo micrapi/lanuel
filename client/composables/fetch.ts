@@ -6,13 +6,8 @@ import type { FetchBody } from '@/types'
 
 export const useHttpFetch = () => {
   const runtimeConfig = useRuntimeConfig()
-  const config: FetchOptions = {
-    baseURL: runtimeConfig.apiUrl,
-    credentials: 'include',
-    headers: {
-      Accept: 'application/json',
-    },
-    retry: 1,
+  const headers: HeadersInit = {
+    Accept: 'application/json',
   }
 
   if (process.server) {
@@ -20,12 +15,19 @@ export const useHttpFetch = () => {
     const xdebugSession = getCookie(useRequestEvent(), runtimeConfig.xdebugCookieName)
 
     if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`
+      headers.Authorization = `Bearer ${token}`
     }
 
     if (xdebugSession) {
-      config.headers['Cookie'] = `${runtimeConfig.xdebugCookieName}=${xdebugSession}`
+      headers.Cookie = `${runtimeConfig.xdebugCookieName}=${xdebugSession}`
     }
+  }
+
+  const config: FetchOptions = {
+    baseURL: runtimeConfig.apiUrl,
+    credentials: 'include',
+    headers,
+    retry: 1,
   }
 
   const instance = $fetch.create(config)

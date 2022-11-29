@@ -31,7 +31,7 @@ export default defineComponent({
                   ? (<ClientOnly>
                     <ElDropdown trigger={'click'}>{
                       {
-                        default: () => <ElButton link>{authStore.user.name}</ElButton>,
+                        default: () => <ElButton link>{authStore.user?.name}</ElButton>,
                         dropdown: () => (
                           <ElDropdownMenu>
                             <ElDropdownItem><NuxtLink to={'/account'}>Account</NuxtLink></ElDropdownItem>
@@ -48,7 +48,7 @@ export default defineComponent({
             </ElContainer>
           </ElHeader>
           <ElMain>
-            {slots.default()}
+            {slots.default?.()}
           </ElMain>
         </ElContainer>
       </div>
