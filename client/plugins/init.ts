@@ -1,7 +1,7 @@
 import { getCookie } from 'h3'
 import { useAuthStore } from '@/stores/auth'
 
-export default defineNuxtPlugin(async (nuxtApp) => {
+export default defineNuxtPlugin((nuxtApp) => {
   const authStore = useAuthStore()
   const runtimeConfig = useRuntimeConfig()
   const headers: HeadersInit = {}
@@ -19,8 +19,12 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     }
   }
 
-  await authStore.fetch({
-    baseURL: runtimeConfig.apiUrl,
-    headers,
+  addRouteMiddleware(async () => {
+    if (!authStore.fetched) {
+      await authStore.fetch({
+        baseURL: runtimeConfig.apiUrl,
+        headers,
+      })
+    }
   })
 })
