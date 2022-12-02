@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Cookie\CookieValuePrefix;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -135,6 +136,6 @@ class LoginController extends Controller
         $user = $request->user();
         $user->currentAccessToken()->delete();
 
-        return response()->json([], 200);
+        return response()->json([], 200)->withoutCookie(config('auth.cookie_name'), '/');
     }
 }
